@@ -81,7 +81,7 @@ seqIo('/home/cpeng/liubo/data/set00/V000.seq','toImgs','/home/cpeng/liubo/data/s
 
 7.如何将vbb文件转化为txt
 --
-使用代码vbb（‘vbbsaveTXT’，‘...’，‘...’）
+使用代码vbb（‘vbbsaveTXT’，‘...’，‘...’）（使用2013，2014会有错误）
 
 8.MATLAB读取文件的操作（有待加强）
 --
@@ -124,3 +124,5 @@ a(1,:)=c;%第一行结果重新赋给a 的第一行
 10.MATLAB中的cell
 --
 取值用{}
+
+## 11.dir ##
