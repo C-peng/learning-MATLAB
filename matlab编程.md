@@ -125,4 +125,59 @@ a(1,:)=c;%第一行结果重新赋给a 的第一行
 --
 取值用{}
 
-## 11.dir ##
+## 11.MATLAB中的dir函数 ##
+
+## 12.MATLAB实现裁剪图片部分区域 ##
+
+imcrop函数的使用
+
+    clear,clc
+    close all
+	img = imread('3.jpg');
+	% img =rgb2gray(img);
+	im =imcrop(img,[497,589,361,37]);
+	imshow(im);
+	T = graythresh(im);
+	I = im2bw(im,T);
+	imshow(I);
+
+
+## 13.如何将带跟踪边框的figure保存到图片中？ ##
+
+请问用matlab在二值图像上画了一个红框，之后怎么把这个图像帮存下来（连红框一起保存），画框的方法用的是rectangle和drawnow两个函数，但是用imwrite保存就没有红框了，用saveas保存的又有一个白色的边框，请求帮助！
+
+	state = regionprops(fg_bw,'Area','BoundingBox');
+	fg_bw_m = cat(3,fg_bw,fg_bw,fg_bw);   %change to 3-D matrix
+	    for l=1:length(state);
+	        if (state(l).Area >150)
+	            ax = fix(state(l).BoundingBox); %change float to integer
+	            fg_bw_m(ax(2),ax(1):ax(1)+ax(3)) = 1; %change pixvalue to red color
+	            fg_bw_m(ax(2)+ax(4),ax(1):ax(1)+ax(3)) = 1;   
+	            fg_bw_m(ax(2):ax(2)+ax(4),ax(1)) = 1;     %set left and right side to red color
+	            fg_bw_m(ax(2):ax(2)+ax(4),ax(1)+ax(3)) = 1;
+	        end
+	    end
+
+## 14.matlab中如何在同一figure中显示多幅图像 ##
+
+写成subplot（m,n,p）或者subplot（mnp）。
+subplot是将多个图画到一个平面上的工具。其中，m表示是图排成m行，n表示图排成n列，也就是整个figure中有n个图是排成一行的，一共m行，如果第一个数字是2就是表示2行图。p是指你现在要把曲线画到figure中哪个图上，最后一个如果是1表示是从左到右第一个位置。
+
+	>> t=0:0.001:1;
+	>> y1=sin(10*t);
+	>> y2=sin(15*t);
+	>> subplot(211)
+	>> plot(t,y1)
+	>> subplot(212)
+	>> plot(t,y2)
+
+
+另一个例子：
+
+	两张图片在一个窗口中显示：
+	hehe=uint8(hehe);
+	figure(1)
+	subplot(2,1,1);imshow(he),title('原始图像'); %显示原始图像
+	%figure(2)
+	subplot(2,1,2);imshow(hehe),title('SLIC分割k=400,m=40'); %显示超像素分割图像
+
