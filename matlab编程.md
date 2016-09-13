@@ -13,55 +13,55 @@ matlab编程
 
 3.简单示例
 ---
-```matlab
-[name score x1 y1 x2 y2]= textread('F:\张达敏给我传的资料\faster-rcnn\faster_rcnn-master\cw2.txt','%d %f %f %f %f %f');
-data=[score x1 y1 x2 y2];
-
-fid = fopen('new.txt','w');
-
-num=1;
-a=name(1,1);
-data_new=data(1,:);
-
-for n=1:size(name)-1;
 	
-	if(a==name(n+1,1))
-	    num=num+1;
-		data_new=[data_new;data(n+1,:)];
-    else
-        fprintf(fid,'%d\n%d\n',a,num);
-		for i=1:size(data_new,1)
-          fprintf(fid,'%f %f %f %f %f\n',  data_new(i,2),data_new(i,3),data_new(i,4)-data_new(i,2),data_new(i,5)-data_new(i,3), data_new(i,1));
+	[name score x1 y1 x2 y2]= textread('F:\张达敏给我传的资料\faster-rcnn\faster_rcnn-master\cw2.txt','%d %f %f %f %f %f');
+	data=[score x1 y1 x2 y2];
+	
+	fid = fopen('new.txt','w');
+	
+	num=1;
+	a=name(1,1);
+	data_new=data(1,:);
+	
+	for n=1:size(name)-1;
+		
+		if(a==name(n+1,1))
+		    num=num+1;
+			data_new=[data_new;data(n+1,:)];
+	    else
+	        fprintf(fid,'%d\n%d\n',a,num);
+			for i=1:size(data_new,1)
+	          fprintf(fid,'%f %f %f %f %f\n',  data_new(i,2),data_new(i,3),data_new(i,4)-data_new(i,2),data_new(i,5)-data_new(i,3), data_new(i,1));
+			end
+			a=name(n+1,1);
+			num=1;
+	        data_new=data(n+1,:);
 		end
-		a=name(n+1,1);
-		num=1;
-        data_new=data(n+1,:);
 	end
-end
+	
+	fprintf(fid,'%d\n%d\n',a,num);
+	for i=1:size(data_new,1)
+	    fprintf(fid,'%f %f %f %f %f\n',  data_new(i,2),data_new(i,3),data_new(i,4)-data_new(i,2),data_new(i,5)-data_new(i,3), data_new(i,1));
+	end
+		 
+	fclose(fid);
 
-fprintf(fid,'%d\n%d\n',a,num);
-for i=1:size(data_new,1)
-    fprintf(fid,'%f %f %f %f %f\n',  data_new(i,2),data_new(i,3),data_new(i,4)-data_new(i,2),data_new(i,5)-data_new(i,3), data_new(i,1));
-end
-	 
-fclose(fid);
 
-```
 
 4.如何将一个行向量添加到另一个矩阵中
 --
 
-```matlab
->> A=[1 1 1 2 2 2];
->> B=[7 7 7 7 7 7;8 8 8 8 8 8];
->> C=[A;B]
 
-C=
+	>> A=[1 1 1 2 2 2];
+	>> B=[7 7 7 7 7 7;8 8 8 8 8 8];
+	>> C=[A;B]
+	
+	C=
+	
+	1 1 1 2 2 2
+	7 7 7 7 7 7
+	8 8 8 8 8 8
 
-1 1 1 2 2 2
-7 7 7 7 7 7
-8 8 8 8 8 8
-```
 5.在matlab中安装Piotr's Computer Vision Matlab Toolbox工具箱
 ---
 （1）打开MATLAB
@@ -77,7 +77,7 @@ C=
 --
 在安装完上面的工具箱后执行以下代码
 
-seqIo('/home/cpeng/liubo/data/set00/V000.seq','toImgs','/home/cpeng/liubo/data/set00/V000')
+	seqIo('/home/cpeng/liubo/data/set00/V000.seq','toImgs','/home/cpeng/liubo/data/set00/V000')
 
 7.如何将vbb文件转化为txt
 --
@@ -100,13 +100,13 @@ strread
 
 高端操作
 
-[names, types, x, y, answer] = textread('D:\mat.txt','%s %s %f %d %s', 1)
-
-[names, levelnum, x, y, answer] = textread(filename , ... '%s Level%d %f %d %s', 1)
-
-textread(filename,'%s%f-%f-%f%f:%f%f','headerlines',1,'delimiter'  ,';');
-
-[name   answer]=textread('my_exam.dat','%s %*s %*f %s')
+	[names, types, x, y, answer] = textread('D:\mat.txt','%s %s %f %d %s', 1)
+	
+	[names, levelnum, x, y, answer] = textread(filename , ... '%s Level%d %f %d %s', 1)
+	
+	textread(filename,'%s%f-%f-%f%f:%f%f','headerlines',1,'delimiter'  ,';');
+	
+	[name   answer]=textread('my_exam.dat','%s %*s %*f %s')
 
 9.MATLAB中的排序
 --
